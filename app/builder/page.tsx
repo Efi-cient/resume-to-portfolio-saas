@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTheme } from "@/components/theme-provider";
 import { themes, Theme } from "@/lib/themes";
 import defaultResumeData from "@/data/resume.json";
@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { ArrowUpRight, Palette, Type, Smartphone, Monitor, Save, Globe } from "lucide-react";
 
 export default function BuilderPage() {
-    const { theme, setTheme } = useTheme();
+    const { theme, setTheme, toggleMode, isDarkMode } = useTheme();
     // State for resume data
     const [resumeData, setResumeData] = useState(defaultResumeData);
     const [activeTab, setActiveTab] = useState<"content" | "style">("content");
@@ -33,16 +33,19 @@ export default function BuilderPage() {
         });
     }
 
+    // Ref for the scrollable preview area
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
     return (
         <div className="flex h-screen overflow-hidden bg-zinc-950 text-zinc-50">
             {/* SIDEBAR EDITOR */}
             <aside className="w-[400px] flex-shrink-0 border-r border-white/10 flex flex-col bg-zinc-900/50 backdrop-blur-xl">
+                {/* ... sidebar content ... */}
                 <div className="p-6 border-b border-white/10">
                     <h1 className="text-xl font-bold tracking-tight">Portfolio Engine</h1>
                     <p className="text-xs text-zinc-500 mt-1">v1.0.0 • Executive Build</p>
                 </div>
-
-                {/* TABS */}
+                {/* ... tabs ... */}
                 <div className="flex border-b border-white/10">
                     <button
                         onClick={() => setActiveTab("content")}
@@ -183,6 +186,19 @@ export default function BuilderPage() {
                                     All themes are automatically optimized for mobile devices. The preview on the right shows the desktop view.
                                 </p>
                             </div>
+
+                            {/* MODE TOGGLE */}
+                            <div className="mt-4 pt-4 border-t border-white/10">
+                                <button
+                                    onClick={toggleMode}
+                                    className="w-full flex items-center justify-between p-3 rounded bg-white/5 hover:bg-white/10 transition-colors"
+                                >
+                                    <span className="text-sm font-bold">Contrast Mode</span>
+                                    <div className={cn("w-10 h-5 rounded-full relative transition-colors", isDarkMode ? "bg-zinc-700" : "bg-white")}>
+                                        <div className={cn("absolute top-1 w-3 h-3 rounded-full transition-all", isDarkMode ? "left-1 bg-white" : "right-1 bg-black")} />
+                                    </div>
+                                </button>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -230,10 +246,10 @@ export default function BuilderPage() {
                 {showDomainModal && <DomainGuideModal onClose={() => setShowDomainModal(false)} />}
                 <div className="absolute inset-4 rounded-xl overflow-hidden border border-white/5 shadow-2xl bg-background transition-colors duration-500">
                     {/* We scale the preview down slightly to fit a "viewport" vibe if needed, but full width is better for realism */}
-                    <div className="h-full overflow-y-auto scrollbar-hide">
+                    <div ref={scrollContainerRef} className="h-full overflow-y-auto scrollbar-hide">
                         <Hero data={resumeData} />
                         <SkillsBento data={resumeData} />
-                        <ProjectDeck data={resumeData} />
+                        <ProjectDeck data={resumeData} scrollContainerRef={scrollContainerRef} />
                         <Footer data={resumeData} />
                     </div>
                 </div>

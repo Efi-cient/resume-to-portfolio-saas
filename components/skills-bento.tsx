@@ -17,6 +17,8 @@ export function SkillsBento({ data = defaultResumeData }: SkillsBentoProps) {
 
     if (theme === "engineer") return <SkillsEngineer data={data} />;
     if (theme === "creative") return <SkillsCreative data={data} />;
+    if (theme === "minimalist") return <SkillsMinimalist data={data} />;
+    if (theme === "neon") return <SkillsNeon data={data} />;
     return <SkillsExecutive data={data} />;
 }
 
@@ -31,9 +33,14 @@ function SkillsExecutive({ data }: SkillsBentoProps) {
 
     return (
         <section className="min-h-screen py-24 px-8 md:px-16 flex flex-col justify-center">
-            <h2 className="text-4xl md:text-6xl font-bold mb-16 tracking-tighter text-foreground">
-                Capability <span className="text-muted">Matrix</span>
-            </h2>
+            <div className="mb-16">
+                <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-foreground mb-4">
+                    Capability <span className="text-muted">Matrix</span>
+                </h2>
+                <p className="max-w-xl text-lg text-muted/80 leading-relaxed">
+                    A comprehensive overview of technical proficiency, strategic leadership, and core competencies cultivated over a decade of professional experience.
+                </p>
+            </div>
             <LayoutGroup>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
                     {categories.map((cat, i) => {
@@ -109,7 +116,7 @@ function SkillsEngineer({ data }: SkillsBentoProps) {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {data.skills[cat].map((skill: string) => (
                                 <div key={skill} className="flex items-center justify-between group cursor-crosshair hover:bg-green-500/10 p-2">
-                                    <span className="text-sm">> {skill}</span>
+                                    <span className="text-sm">&gt; {skill}</span>
                                     <div className="w-24 h-2 bg-green-900/50 overflow-hidden relative">
                                         <motion.div
                                             initial={{ width: 0 }}
@@ -137,7 +144,7 @@ function SkillsCreative({ data }: SkillsBentoProps) {
     const rotations = ["rotate-[-2deg]", "rotate-[3deg]", "rotate-[-1deg]"];
 
     return (
-        <section className="min-h-screen py-24 px-8 md:px-16 bg-[#fff0f5] flex flex-col items-center">
+        <section className="min-h-screen py-24 px-8 md:px-16 bg-[#fff0f5] flex flex-col items-center text-black">
             <h2 className="text-6xl md:text-8xl font-black text-pink-600 mb-20 text-center tracking-tighter" style={{ WebkitTextStroke: "1px black" }}>
                 MY TOOLKIT
             </h2>
@@ -169,4 +176,67 @@ function SkillsCreative({ data }: SkillsBentoProps) {
             </div>
         </section>
     );
+}
+
+// ----------------------------------------------------------------------
+// 4. MINIMALIST THEME (Swiss)
+// ----------------------------------------------------------------------
+function SkillsMinimalist({ data }: SkillsBentoProps) {
+    const categories = Object.keys(data.skills) as Array<keyof typeof data.skills>;
+    return (
+        <section className="min-h-screen py-24 px-8 md:px-24 bg-white text-black">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-black border-2 border-black">
+                {categories.map((cat, i) => (
+                    <div key={cat} className="bg-white p-12 min-h-[400px] flex flex-col justify-between hover:bg-zinc-50 transition-colors">
+                        <div>
+                            <span className="text-xs font-bold uppercase tracking-widest bg-black text-white px-2 py-1">Section 0{i + 1}</span>
+                            <h3 className="text-4xl font-bold mt-8 mb-8 tracking-tight">{cat}</h3>
+                        </div>
+                        <ul className="space-y-4">
+                            {data.skills[cat].map(skill => (
+                                <li key={skill} className="text-lg font-medium border-b border-black/10 pb-2">
+                                    {skill}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )
+}
+
+// ----------------------------------------------------------------------
+// 5. NEON THEME (Cyberpunk)
+// ----------------------------------------------------------------------
+function SkillsNeon({ data }: SkillsBentoProps) {
+    const categories = Object.keys(data.skills) as Array<keyof typeof data.skills>;
+    return (
+        <section className="min-h-screen py-24 px-8 md:px-16 bg-[#050510] text-[#00f0ff]">
+            <h2 className="text-5xl font-bold mb-16 text-center text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#fcee0a]">
+                NEURAL_LINKS
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {categories.map((cat) => (
+                    <div key={cat} className="relative group">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00f0ff] to-[#fcee0a] rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+                        <div className="relative p-6 bg-black rounded-lg ring-1 ring-gray-900/5 leading-none flex items-top justify-start space-x-6 h-full">
+                            <div className="space-y-4 w-full">
+                                <h3 className="text-xl font-bold text-[#b026ff]">{cat}</h3>
+                                <div className="space-y-2">
+                                    {data.skills[cat].map(skill => (
+                                        <div key={skill} className="flex items-center gap-3">
+                                            <div className="w-2 h-2 bg-[#fcee0a] rounded-full shadow-[0_0_5px_#fcee0a]" />
+                                            <span className="text-zinc-100">{skill}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )
 }

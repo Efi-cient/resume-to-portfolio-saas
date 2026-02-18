@@ -1,4 +1,4 @@
-export type Theme = "executive" | "engineer" | "creative";
+export type Theme = "executive" | "engineer" | "creative" | "minimalist" | "neon";
 
 export interface ThemeConfig {
     name: Theme;
@@ -65,8 +65,8 @@ export const themes: Record<Theme, ThemeConfig> = {
         colors: {
             background: "#fff0f5", // Lavender Blush
             foreground: "#be185d", // Pink 700
-            muted: "#f472b6",      // Pink 400
-            primary: "#ec4899",
+            muted: "#831843",      // Pink 900 (Darker for contrast)
+            primary: "#be185d",
             border: "#fbcfe8",
         },
         fonts: {
@@ -74,7 +74,43 @@ export const themes: Record<Theme, ThemeConfig> = {
             mono: "monospace",
             heading: "serif",
         },
-        physics: { stiffness: 120, damping: 10 }, // Bouncy
-        radius: "1.5rem", // rounded-3xl
+        physics: { stiffness: 120, damping: 10 },
+        radius: "1.5rem",
     },
+    minimalist: {
+        name: "minimalist",
+        label: "Swiss Modern",
+        colors: {
+            background: "#ffffff",
+            foreground: "#000000",
+            muted: "#52525b", // Zinc 600
+            primary: "#000000",
+            border: "#e4e4e7", // Zinc 200
+        },
+        fonts: {
+            sans: "var(--font-inter)",
+            mono: "var(--font-inter)",
+            heading: "var(--font-inter)",
+        },
+        physics: { stiffness: 80, damping: 25 },
+        radius: "0px",
+    },
+    neon: {
+        name: "neon",
+        label: "Cyberpunk 2077",
+        colors: {
+            background: "#050510", // Deep Blue/Black
+            foreground: "#00f0ff", // Neon Cyan
+            muted: "#b026ff",      // Neon Purple
+            primary: "#fcee0a",    // Neon Yellow
+            border: "rgba(0, 240, 255, 0.2)",
+        },
+        fonts: {
+            sans: "sans-serif",
+            mono: "monospace",
+            heading: "sans-serif",
+        },
+        physics: { stiffness: 300, damping: 20 },
+        radius: "4px",
+    }
 };

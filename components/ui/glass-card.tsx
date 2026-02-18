@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { MouseEvent } from "react";
+import React, { MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 
 interface GlassCardProps {
@@ -22,14 +22,16 @@ export function GlassCard({ children, className }: GlassCardProps) {
     return (
         <div
             className={cn(
-                "group relative border border-white/5 bg-white/5 backdrop-blur-md overflow-hidden rounded-xl",
+                "group relative border border-white/5 bg-white/5 backdrop-blur-md overflow-hidden",
                 className
             )}
+            style={{ borderRadius: "var(--radius)" }}
             onMouseMove={handleMouseMove}
         >
             <motion.div
-                className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
+                className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
                 style={{
+                    borderRadius: "var(--radius)",
                     background: useMotionTemplate`
             radial-gradient(
               650px circle at ${mouseX}px ${mouseY}px,

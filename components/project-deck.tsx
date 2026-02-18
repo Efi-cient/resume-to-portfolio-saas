@@ -1,19 +1,21 @@
 "use client";
 
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { GlassCard } from "@/components/ui/glass-card";
 import defaultResumeData from "@/data/resume.json";
 import { ArrowUpRight } from "lucide-react";
 
 interface ProjectDeckProps {
     data?: typeof defaultResumeData;
+    scrollContainerRef?: React.RefObject<HTMLElement>;
 }
 
-export function ProjectDeck({ data = defaultResumeData }: ProjectDeckProps) {
+export function ProjectDeck({ data = defaultResumeData, scrollContainerRef }: ProjectDeckProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
+        container: scrollContainerRef,
         offset: ["start start", "end end"],
     });
 
@@ -70,8 +72,9 @@ function Card({ project, progress, range, targetScale, i, total }: CardProps) {
         <motion.div
             style={{
                 scale,
+                opacity,
                 top: `calc(-10% + ${i * 25}px)`,
-                zIndex: i
+                zIndex: total - i
             }}
             className="absolute top-0 w-full md:w-[800px] h-[500px] origin-top"
         >

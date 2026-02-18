@@ -1,40 +1,56 @@
 {
-  "name": "Alex Sterling",
-  "title": "Principal Product Designer",
-  "tagline": "Building scalable financial infrastructure for the web.",
+  "name": "Jordan Smith",
+  "title": "Senior Data Analyst",
+  "tagline": "Turning complex datasets into strategic business decisions through visualization and predictive modeling.",
   "ticker": [
-    "Ex-Stripe",
-    "12Y Experience",
-    "$50M+ Revenue Driven",
-    "System Architect",
-    "Angel Investor"
+    "5+ Years Experience",
+    "SQL Expert",
+    "Python / Pandas",
+    "Tableau Certified",
+    "Predictive Modeling",
+    "A/B Testing"
   ],
   "skills": {
-    "strategic": ["Product Strategy", "Design Systems", "Team Leadership"],
-    "technical": ["Next.js", "React", "TypeScript", "Node.js", "Figma", "WebGL"],
-    "leadership": ["Mentorship", "Hiring", "Roadmap Planning"]
+    "strategic": [
+      "Data Storytelling",
+      "KPI Definition",
+      "Stakeholder Management",
+      "A/B Testing"
+    ],
+    "technical": [
+      "SQL (PostgreSQL, BigQuery)",
+      "Python (Pandas, Scikit-learn)",
+      "Tableau",
+      "Power BI",
+      "Excel VBA"
+    ],
+    "leadership": [
+      "Jira / Agile",
+      "Mentoring Juniors",
+      "Cross-Functional Collab"
+    ]
   },
   "projects": [
     {
       "id": "1",
-      "title": "Fintech Dashboard",
-      "role": "Lead Designer",
-      "metric": "+45% User Retention",
-      "description": "Redesigned the core transaction dashboard for a Series B fintech, focusing on data clarity and execution speed."
+      "title": "Customer Churn Prediction",
+      "role": "Lead Analyst",
+      "metric": "15% Reduction in Churn",
+      "description": "Developed a predictive model using Python and Random Forest to identify at-risk customers, allowing the retention team to intervene proactively."
     },
     {
       "id": "2",
-      "title": "Global Payments System",
-      "role": "Architect",
-      "metric": "99.99% Uptime",
-      "description": "Architected the frontend infrastructure for a global payments rail processing $1B+ annually."
+      "title": "Sales Performance Dashboard",
+      "role": "Tableau Developer",
+      "metric": "20 Hours Saved/Week",
+      "description": "Automated weekly sales reporting by building a dynamic Tableau dashboard, replacing manual Excel processes and providing real-time visibility."
     },
     {
       "id": "3",
-      "title": "AI Analytics Platform",
-      "role": "Founding Engineer",
-      "metric": "0 to 1 Launch",
-      "description": "Built the MVP and scaled the engineering team for an AI-driven analytics platform acquired by TechGiant."
+      "title": "Marketing Attribution Model",
+      "role": "Data Analyst",
+      "metric": "25% ROI Improvement",
+      "description": "Designed a multi-touch attribution model to accurately allocate marketing spend across channels, optimizing the $2M annual budget."
     }
   ]
 }
