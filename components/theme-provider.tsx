@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Theme, themes, ThemeConfig } from "@/lib/themes";
 
 interface ThemeContextType {
@@ -14,26 +15,23 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+    const searchParams = useSearchParams();
     const [theme, setTheme] = useState<Theme>("executive");
     const [isDarkMode, setIsDarkMode] = useState(true);
 
     const toggleMode = () => setIsDarkMode(!isDarkMode);
 
+    // Sync theme from URL query param on mount/update
+    useEffect(() => {
+        const themeParam = searchParams.get("theme");
+        if (themeParam && themeParam in themes) {
+            setTheme(themeParam as Theme);
+        }
+    }, [searchParams]);
+
     useEffect(() => {
         const root = document.documentElement;
         const config = themes[theme];
-
-        // Determine colors based on mode override
-        // If IS DARK (default), use config. If LIGHT, swap bg/fg roughly
-
-        // For specific themes like Creative (light default), if we toggle "Dark Mode" (isDarkMode=true),
-        // we effectively want the DEFAULT functionality.
-        // Actually, "Creative" IS light. So isDarkMode = false should match default Creative.
-        // Let's rely on the theme's default nature + simple swap if user requests inversion.
-
-        // BETTER APPROACH: Just set properties. If toggle is pressed, invert.
-        // We assume "isDarkMode" state tracks the *intended* brightness relative to the theme?
-        // No, let's just make it a toggle that swaps BG and FG.
 
         if (isDarkMode) {
             root.style.setProperty("--background", config.colors.background);
@@ -49,7 +47,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         root.style.setProperty("--border", config.colors.border);
         root.style.setProperty("--radius", config.radius);
 
-        // Apply Fonts (simplified for demo, usually done via classes)
         root.style.setProperty("--font-sans", config.fonts.sans);
         root.style.setProperty("--font-mono", config.fonts.mono);
 

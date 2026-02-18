@@ -157,22 +157,28 @@ export default function BuilderPage() {
                                         key={t.name}
                                         onClick={() => setTheme(t.name)}
                                         className={cn(
-                                            "relative p-4 rounded-xl border text-left transition-all",
+                                            "relative p-4 rounded-xl border text-left transition-all group overflow-hidden",
                                             theme === t.name
                                                 ? "border-white bg-white/10"
                                                 : "border-white/5 hover:border-white/20 bg-black/20"
                                         )}
                                     >
-                                        <div className="flex justify-between items-center mb-2">
-                                            <span className="font-bold">{t.label}</span>
-                                            {theme === t.name && <div className="w-2 h-2 rounded-full bg-green-500" />}
+                                        <div className="flex justify-between items-center mb-2 z-10 relative">
+                                            <span className="font-bold text-sm tracking-tight">{t.label}</span>
+                                            {theme === t.name && <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />}
                                         </div>
 
-                                        <div className="flex gap-2 mt-4">
-                                            <div className="w-6 h-6 rounded-full" style={{ background: t.colors.background, border: "1px solid white" }} />
-                                            <div className="w-6 h-6 rounded-full" style={{ background: t.colors.primary }} />
-                                            <div className="w-6 h-6 rounded-full" style={{ background: t.colors.muted }} />
+                                        <div className="flex gap-2 mt-4 z-10 relative">
+                                            <div className="w-6 h-6 rounded-full ring-1 ring-white/10" style={{ background: t.colors.background }} title="Background" />
+                                            <div className="w-6 h-6 rounded-full ring-1 ring-white/10" style={{ background: t.colors.primary }} title="Primary" />
+                                            <div className="w-6 h-6 rounded-full ring-1 ring-white/10" style={{ background: t.colors.muted }} title="Muted" />
                                         </div>
+
+                                        {/* Subtle background wash of the primary color */}
+                                        <div
+                                            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                                            style={{ background: t.colors.primary }}
+                                        />
                                     </button>
                                 ))}
                             </div>
