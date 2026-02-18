@@ -1,0 +1,40 @@
+{
+  "name": "Alex Sterling",
+  "title": "Principal Product Designer",
+  "tagline": "Building scalable financial infrastructure for the web.",
+  "ticker": [
+    "Ex-Stripe",
+    "12Y Experience",
+    "$50M+ Revenue Driven",
+    "System Architect",
+    "Angel Investor"
+  ],
+  "skills": {
+    "strategic": ["Product Strategy", "Design Systems", "Team Leadership"],
+    "technical": ["Next.js", "React", "TypeScript", "Node.js", "Figma", "WebGL"],
+    "leadership": ["Mentorship", "Hiring", "Roadmap Planning"]
+  },
+  "projects": [
+    {
+      "id": "1",
+      "title": "Fintech Dashboard",
+      "role": "Lead Designer",
+      "metric": "+45% User Retention",
+      "description": "Redesigned the core transaction dashboard for a Series B fintech, focusing on data clarity and execution speed."
+    },
+    {
+      "id": "2",
+      "title": "Global Payments System",
+      "role": "Architect",
+      "metric": "99.99% Uptime",
+      "description": "Architected the frontend infrastructure for a global payments rail processing $1B+ annually."
+    },
+    {
+      "id": "3",
+      "title": "AI Analytics Platform",
+      "role": "Founding Engineer",
+      "metric": "0 to 1 Launch",
+      "description": "Built the MVP and scaled the engineering team for an AI-driven analytics platform acquired by TechGiant."
+    }
+  ]
+}
