@@ -15,9 +15,12 @@ export type Theme =
     | "game_dev"
     | "academic";
 
+export type LayoutType = "centered" | "split" | "asymmetric" | "grid" | "minimal";
+
 export interface ThemeConfig {
     name: Theme;
     label: string;
+    layout: LayoutType;
     colors: {
         background: string;
         foreground: string;
@@ -41,10 +44,11 @@ export const themes: Record<Theme, ThemeConfig> = {
     executive: {
         name: "executive",
         label: "Corporate Ethereal",
+        layout: "centered",
         colors: {
-            background: "#0a0a0a", // Zinc 950
-            foreground: "#fafafa", // Zinc 50
-            muted: "#a1a1aa",      // Zinc 400
+            background: "#0a0a0a",
+            foreground: "#fafafa",
+            muted: "#a1a1aa",
             primary: "#ffffff",
             border: "rgba(255,255,255,0.08)",
         },
@@ -59,12 +63,13 @@ export const themes: Record<Theme, ThemeConfig> = {
     engineer: {
         name: "engineer",
         label: "Terminal Velocity",
+        layout: "split",
         colors: {
             background: "#0c0c0c",
-            foreground: "#22c55e", // Green 500
-            muted: "#15803d",      // Green 700
+            foreground: "#22c55e",
+            muted: "#15803d",
             primary: "#22c55e",
-            border: "#14532d",     // Green 900
+            border: "#14532d",
         },
         fonts: {
             sans: "monospace",
@@ -77,10 +82,11 @@ export const themes: Record<Theme, ThemeConfig> = {
     creative: {
         name: "creative",
         label: "Chaos Theory",
+        layout: "asymmetric",
         colors: {
-            background: "#fff0f5", // Lavender Blush
-            foreground: "#be185d", // Pink 700
-            muted: "#831843",      // Pink 900
+            background: "#fff0f5",
+            foreground: "#be185d",
+            muted: "#831843",
             primary: "#be185d",
             border: "#fbcfe8",
         },
@@ -95,12 +101,13 @@ export const themes: Record<Theme, ThemeConfig> = {
     minimalist: {
         name: "minimalist",
         label: "Swiss Modern",
+        layout: "minimal",
         colors: {
             background: "#ffffff",
             foreground: "#000000",
-            muted: "#52525b", // Zinc 600
+            muted: "#52525b",
             primary: "#000000",
-            border: "#e4e4e7", // Zinc 200
+            border: "#e4e4e7",
         },
         fonts: {
             sans: "var(--font-inter)",
@@ -113,6 +120,7 @@ export const themes: Record<Theme, ThemeConfig> = {
     neon: {
         name: "neon",
         label: "Cyberpunk 2077",
+        layout: "grid",
         colors: {
             background: "#050510",
             foreground: "#00f0ff",
@@ -131,11 +139,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     video_editor: {
         name: "video_editor",
         label: "Timeline Pro",
+        layout: "split",
         colors: {
             background: "#1e1e1e",
             foreground: "#d4d4d4",
             muted: "#858585",
-            primary: "#a855f7", // Purple
+            primary: "#a855f7",
             border: "#3f3f46",
         },
         fonts: {
@@ -149,11 +158,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     "3d_artist": {
         name: "3d_artist",
         label: "Viewport Shading",
+        layout: "grid",
         colors: {
             background: "#2d2d2d",
             foreground: "#e0e0e0",
             muted: "#a3a3a3",
-            primary: "#f97316", // Orange
+            primary: "#f97316",
             border: "#404040",
         },
         fonts: {
@@ -167,11 +177,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     graphic_designer: {
         name: "graphic_designer",
         label: "Print Ready",
+        layout: "minimal",
         colors: {
             background: "#ffffff",
             foreground: "#000000",
             muted: "#9ca3af",
-            primary: "#06b6d4", // Cyan
+            primary: "#06b6d4",
             border: "#e5e7eb",
         },
         fonts: {
@@ -185,11 +196,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     software_engineer: {
         name: "software_engineer",
         label: "Dark IDE",
+        layout: "split",
         colors: {
             background: "#282c34",
             foreground: "#abb2bf",
             muted: "#5c6370",
-            primary: "#61afef", // Blue
+            primary: "#61afef",
             border: "#3e4451",
         },
         fonts: {
@@ -203,11 +215,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     photographer: {
         name: "photographer",
         label: "Darkroom",
+        layout: "centered",
         colors: {
             background: "#000000",
             foreground: "#e5e5e5",
             muted: "#525252",
-            primary: "#ef4444", // Red
+            primary: "#ef4444",
             border: "#262626",
         },
         fonts: {
@@ -221,11 +234,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     architect: {
         name: "architect",
         label: "Blueprint",
+        layout: "minimal",
         colors: {
             background: "#f0f4f8",
             foreground: "#1e293b",
             muted: "#64748b",
-            primary: "#3b82f6", // Blue
+            primary: "#3b82f6",
             border: "#cbd5e1",
         },
         fonts: {
@@ -239,11 +253,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     fashion: {
         name: "fashion",
         label: "Editorial",
+        layout: "asymmetric",
         colors: {
             background: "#171717",
             foreground: "#fafafa",
             muted: "#737373",
-            primary: "#d4af37", // Gold
+            primary: "#d4af37",
             border: "#404040",
         },
         fonts: {
@@ -257,11 +272,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     musician: {
         name: "musician",
         label: "Acoustic",
+        layout: "centered",
         colors: {
             background: "#2a2422",
             foreground: "#efeae5",
             muted: "#a8a29e",
-            primary: "#d97706", // Amber
+            primary: "#d97706",
             border: "#57534e",
         },
         fonts: {
@@ -275,6 +291,7 @@ export const themes: Record<Theme, ThemeConfig> = {
     game_dev: {
         name: "game_dev",
         label: "8-Bit Arcade",
+        layout: "grid",
         colors: {
             background: "#201a30",
             foreground: "#00ff9f",
@@ -293,11 +310,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     academic: {
         name: "academic",
         label: "Journal",
+        layout: "minimal",
         colors: {
             background: "#fcfbf7",
             foreground: "#292524",
             muted: "#78716c",
-            primary: "#78350f", // Brown
+            primary: "#78350f",
             border: "#e7e5e4",
         },
         fonts: {
