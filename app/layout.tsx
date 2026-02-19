@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased font-sans`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <Suspense fallback={null}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </Suspense>
       </body>
     </html>
   );
