@@ -69,18 +69,30 @@ function parseResumeText(text: string) {
         return { label, url: cleanUrl };
     });
 
-    // 4. EXTRACT ADDRESS (Heuristic)
-    // Look for patterns like "City, State Zip" or just "City, State"
-    // This is tricky without NLP, so we'll look for lines with 2 capitalized words and a comma, or zip codes
+    // 4. EXTRACT ADDRESS (Heuristic & Keyword based)
     let address = "";
-    const addressRegex = /([A-Z][a-z]+,\s[A-Z]{2}(\s\d{5})?)/;
-    for (const line of lines.slice(0, 10)) { // Usually at top
-        if (addressRegex.test(line) && !emailRegex.test(line) && !socialRegex.test(line)) {
-            const match = line.match(addressRegex);
+    // Regex for "City, State Zip" or "City, State"
+    const cityStateRegex = /([A-Z][a-zA-Z\s]+,\s[A-Z]{2}(\s\d{5})?)/;
+    // Regex for common address keywords
+    const addressKeywordsRegex = /\b(Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Lane|Ln|Boulevard|Blvd|Way|Circle|Cir|Court|Ct|Plaza|Plz|Square|Sq|Apartment|Apt|Suite|Ste|Unit|Box)\b/i;
+
+    for (const line of lines.slice(0, 20)) { // Check top 20 lines
+        const cleanLine = line.trim();
+        // Skip emails/phones/socials
+        if (emailRegex.test(cleanLine) || socialRegex.test(cleanLine) || phoneRegex.test(cleanLine)) continue;
+
+        // If line matches "City, State" pattern
+        if (cityStateRegex.test(cleanLine)) {
+            const match = cleanLine.match(cityStateRegex);
             if (match) {
                 address = match[0];
                 break;
             }
+        }
+        // OR if line contains explicit address keywords and a number (e.g. "123 Main St")
+        if (addressKeywordsRegex.test(cleanLine) && /\d/.test(cleanLine)) {
+            address = cleanLine;
+            break;
         }
     }
 
@@ -94,8 +106,11 @@ function parseResumeText(text: string) {
 
         // Simple heuristic: 2-4 words, mostly letters
         if (cleanLine.length > 2 && cleanLine.length < 30 && /^[a-zA-Z\s]+$/.test(cleanLine)) {
-            name = cleanLine;
-            break;
+            // Extra check: Name shouldn't be an address
+            if (!addressKeywordsRegex.test(cleanLine) && !cityStateRegex.test(cleanLine)) {
+                name = cleanLine;
+                break;
+            }
         }
     }
 
@@ -104,10 +119,24 @@ function parseResumeText(text: string) {
     let tagline = `Professional with experience in industry.`;
     for (const line of lines) {
         const cleanLine = line.trim();
-        if (cleanLine.length > 40 && cleanLine.length < 200 && !emailRegex.test(cleanLine) && !socialRegex.test(cleanLine) && !phoneRegex.test(cleanLine)) {
-            tagline = cleanLine;
-            break;
-        }
+        // Skip if line is too short/long
+        if (cleanLine.length < 40 || cleanLine.length > 300) continue;
+
+        // Skip if line contains email, social links, or phone patterns
+        if (emailRegex.test(cleanLine) || socialRegex.test(cleanLine) || phoneRegex.test(cleanLine)) continue;
+
+        // CRITICAL: Skip if line literally contains the extracted address or phone
+        if (address && cleanLine.includes(address)) continue;
+        if (phone && cleanLine.includes(phone)) continue;
+
+        // CRITICAL: Skip if line contains ANY address keywords (Blacklist)
+        if (addressKeywordsRegex.test(cleanLine)) continue;
+
+        // Skip if it looks like a location line (e.g. "City, State")
+        if (cityStateRegex.test(cleanLine)) continue;
+
+        tagline = cleanLine;
+        break;
     }
 
     // 7. GENERATE PROJECTS FROM EXPERIENCE
