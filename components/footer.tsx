@@ -40,6 +40,22 @@ export function Footer({ data = defaultResumeData }: FooterProps) {
                                 </div>
                             )}
 
+                            {/* Phone & Address */}
+                            <div className="flex flex-col gap-2">
+                                {data.contact?.phone && (
+                                    <>
+                                        <span className="text-muted text-sm">Phone</span>
+                                        <span className="text-xl">{data.contact.phone}</span>
+                                    </>
+                                )}
+                                {data.contact?.address && (
+                                    <>
+                                        <span className="text-muted text-sm mt-2">Location</span>
+                                        <span className="text-xl">{data.contact.address}</span>
+                                    </>
+                                )}
+                            </div>
+
                             <div className="flex gap-8">
                                 {/* Social Links */}
                                 {data.contact?.socials && data.contact.socials.length > 0 && (

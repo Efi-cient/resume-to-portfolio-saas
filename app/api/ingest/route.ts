@@ -47,7 +47,13 @@ function parseResumeText(text: string) {
     const emails = text.match(emailRegex);
     const email = emails ? emails[0] : "";
 
-    // 2. EXTRACT SOCIALS / LINKS
+    // 2. EXTRACT PHONE
+    // Matches common formats: (123) 456-7890, 123-456-7890, +1 123 456 7890
+    const phoneRegex = /(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}/gi;
+    const phones = text.match(phoneRegex);
+    const phone = phones ? phones.find(p => p.length > 9) || "" : "";
+
+    // 3. EXTRACT SOCIALS / LINKS
     const socialRegex = /((https?:\/\/)?(www\.)?(linkedin\.com|github\.com|twitter\.com|x\.com)\/[^\s]+)/gi;
     const socialsFound = text.match(socialRegex) || [];
     const socials = socialsFound.map(url => {
@@ -63,13 +69,28 @@ function parseResumeText(text: string) {
         return { label, url: cleanUrl };
     });
 
-    // 3. EXTRACT NAME
-    // Heuristic: Name is usually top lines, exclude lines that are just emails or links
+    // 4. EXTRACT ADDRESS (Heuristic)
+    // Look for patterns like "City, State Zip" or just "City, State"
+    // This is tricky without NLP, so we'll look for lines with 2 capitalized words and a comma, or zip codes
+    let address = "";
+    const addressRegex = /([A-Z][a-z]+,\s[A-Z]{2}(\s\d{5})?)/;
+    for (const line of lines.slice(0, 10)) { // Usually at top
+        if (addressRegex.test(line) && !emailRegex.test(line) && !socialRegex.test(line)) {
+            const match = line.match(addressRegex);
+            if (match) {
+                address = match[0];
+                break;
+            }
+        }
+    }
+
+    // 5. EXTRACT NAME
+    // Heuristic: Name is usually top lines, exclude lines that are just emails or links or phone
     let name = "Your Name";
     for (const line of lines) {
         const cleanLine = line.trim();
-        // Skip if line is just an email or link
-        if (emailRegex.test(cleanLine) || socialRegex.test(cleanLine)) continue;
+        // Skip if line is just an email or link or phone
+        if (emailRegex.test(cleanLine) || socialRegex.test(cleanLine) || phoneRegex.test(cleanLine)) continue;
 
         // Simple heuristic: 2-4 words, mostly letters
         if (cleanLine.length > 2 && cleanLine.length < 30 && /^[a-zA-Z\s]+$/.test(cleanLine)) {
@@ -78,26 +99,33 @@ function parseResumeText(text: string) {
         }
     }
 
-    // 4. GENERATE TAGLINE
+    // 6. GENERATE TAGLINE
     // Find a line that looks like a summary (longer than name, not a contact info)
     let tagline = `Professional with experience in industry.`;
     for (const line of lines) {
         const cleanLine = line.trim();
-        if (cleanLine.length > 40 && cleanLine.length < 200 && !emailRegex.test(cleanLine) && !socialRegex.test(cleanLine)) {
+        if (cleanLine.length > 40 && cleanLine.length < 200 && !emailRegex.test(cleanLine) && !socialRegex.test(cleanLine) && !phoneRegex.test(cleanLine)) {
             tagline = cleanLine;
             break;
         }
     }
 
+    // 7. GENERATE PROJECTS FROM EXPERIENCE
+    // Look for "Experience" or "History" section
+    const expIndex = lines.findIndex(l => /experience|work history|employment/i.test(l));
+    let projectDesc = "Extracted from CV...";
+    if (expIndex !== -1) {
+        // Grab the next few lines
+        projectDesc = lines.slice(expIndex + 1, expIndex + 6).join(" ").slice(0, 300) + "...";
+    }
 
-    // 5. GENERATE PROJECTS (Simulation)
     const projects = [
         {
             id: "1",
-            title: "Strategic Initiative",
-            role: "Lead",
-            metric: "Key Driver",
-            description: "Extracted from CV: " + cleanText.slice(0, 100) + "..."
+            title: "Recent Experience",
+            role: "Professional",
+            metric: "Key Contributor",
+            description: projectDesc || "Detailed work experience extracted from your uploaded CV."
         }
     ];
 
@@ -108,6 +136,8 @@ function parseResumeText(text: string) {
         ticker: ["Strategic Vision", "Revenue Growth", "Team Leadership", "Innovation"],
         contact: {
             email: email,
+            phone: phone,
+            address: address,
             socials: socials
         },
         skills: {

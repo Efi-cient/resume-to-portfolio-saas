@@ -222,6 +222,26 @@ export default function BuilderPage() {
                     />
                   </div>
                   <div className="space-y-2">
+                    <label className="text-sm text-zinc-400">Phone</label>
+                    <input
+                      type="text"
+                      value={resumeData.contact?.phone || ""}
+                      onChange={(e) => handleContactChange("phone", e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm focus:outline-none focus:border-white/30"
+                      placeholder="+1 (555) 000-0000"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm text-zinc-400">Address</label>
+                    <input
+                      type="text"
+                      value={resumeData.contact?.address || ""}
+                      onChange={(e) => handleContactChange("address", e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm focus:outline-none focus:border-white/30"
+                      placeholder="City, Country"
+                    />
+                  </div>
+                  <div className="space-y-2">
                     <label className="text-sm text-zinc-400">Social Links</label>
                     {resumeData.contact?.socials?.map((social: any, i: number) => (
                       <div key={i} className="flex gap-2 mb-2">
