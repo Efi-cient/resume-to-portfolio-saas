@@ -34,6 +34,50 @@ export default function BuilderPage() {
     });
   }
 
+  const handleContactChange = (field: string, value: string) => {
+    setResumeData(prev => ({
+      ...prev,
+      contact: {
+        ...prev.contact,
+        [field]: value
+      }
+    }));
+  };
+
+  const handleSocialChange = (index: number, field: "label" | "url", value: string) => {
+    setResumeData(prev => {
+      const newSocials = [...(prev.contact?.socials || [])];
+      newSocials[index] = { ...newSocials[index], [field]: value };
+      return {
+        ...prev,
+        contact: {
+          ...prev.contact,
+          socials: newSocials
+        }
+      };
+    });
+  };
+
+  const addSocial = () => {
+    setResumeData(prev => ({
+      ...prev,
+      contact: {
+        ...prev.contact,
+        socials: [...(prev.contact?.socials || []), { label: "New Link", url: "#" }]
+      }
+    }));
+  };
+
+  const removeSocial = (index: number) => {
+    setResumeData(prev => ({
+      ...prev,
+      contact: {
+        ...prev.contact,
+        socials: (prev.contact?.socials || []).filter((_, i) => i !== index)
+      }
+    }));
+  };
+
   // Ref for the scrollable preview area
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -163,6 +207,53 @@ export default function BuilderPage() {
                       className="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm focus:outline-none focus:border-white/30"
                     />
                   ))}
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-xs uppercase tracking-widest text-zinc-500 font-bold">Contact Info</h3>
+                  <div className="space-y-2">
+                    <label className="text-sm text-zinc-400">Email</label>
+                    <input
+                      type="email"
+                      value={resumeData.contact?.email || ""}
+                      onChange={(e) => handleContactChange("email", e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm focus:outline-none focus:border-white/30"
+                      placeholder="hello@example.com"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm text-zinc-400">Social Links</label>
+                    {resumeData.contact?.socials?.map((social: any, i: number) => (
+                      <div key={i} className="flex gap-2 mb-2">
+                        <input
+                          type="text"
+                          value={social.label}
+                          onChange={(e) => handleSocialChange(i, "label", e.target.value)}
+                          className="w-1/3 bg-black/20 border border-white/10 rounded px-2 py-2 text-sm focus:outline-none focus:border-white/30"
+                          placeholder="Label"
+                        />
+                        <input
+                          type="text"
+                          value={social.url}
+                          onChange={(e) => handleSocialChange(i, "url", e.target.value)}
+                          className="flex-1 bg-black/20 border border-white/10 rounded px-2 py-2 text-sm focus:outline-none focus:border-white/30"
+                          placeholder="URL"
+                        />
+                        <button
+                          onClick={() => removeSocial(i)}
+                          className="text-zinc-500 hover:text-red-400 px-1"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      onClick={addSocial}
+                      className="text-xs text-sky-400 hover:text-sky-300 font-medium"
+                    >
+                      + Add Social Link
+                    </button>
+                  </div>
                 </div>
               </div>
             ) : (

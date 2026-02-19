@@ -10,6 +10,19 @@
     "Predictive Modeling",
     "A/B Testing"
   ],
+  "contact": {
+    "email": "hello@jordansmith.com",
+    "socials": [
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com/in/jordan"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/jordan"
+      }
+    ]
+  },
   "skills": {
     "strategic": [
       "Data Storytelling",
