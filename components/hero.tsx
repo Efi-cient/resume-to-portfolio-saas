@@ -201,10 +201,10 @@ function HeroMinimal({ data }: HeroInnerProps) {
                         <span className="text-xs block opacity-70">Basel, 1950</span>
                     </div>
                     <div className="md:col-span-9">
-                        <h1 className="text-[15vw] leading-[0.8] font-bold tracking-tighter transition-colors">
+                        <h1 className="text-[14vw] md:text-[15vw] leading-[0.8] font-bold tracking-tighter transition-colors">
                             {data.name.split(" ")[0]}
                         </h1>
-                        <h1 className="text-[15vw] leading-[0.8] font-bold tracking-tighter text-right transition-colors">
+                        <h1 className="text-[14vw] md:text-[15vw] leading-[0.8] font-bold tracking-tighter text-right transition-colors">
                             {data.name.split(" ")[1]}
                         </h1>
                     </div>
@@ -321,7 +321,7 @@ function HeroPrint({ data }: HeroInnerProps) {
                     Proof v.3
                 </motion.div>
                 {/* Mix blend removed for readability, using standard color inversion */}
-                <h1 className="text-7xl md:text-[10rem] font-black tracking-tighter leading-none mb-6">
+                <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter leading-none mb-6">
                     {data.name}
                 </h1>
                 <p className="text-2xl md:text-3xl font-medium tracking-tight opacity-80">
@@ -364,7 +364,7 @@ function HeroJournal({ data }: HeroInnerProps) {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 flex-1">
                 {/* Title Section */}
                 <div className="md:col-span-12 mb-8 text-center">
-                    <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-4 tracking-tight">
+                    <h1 className="text-4xl md:text-7xl font-bold leading-tight mb-4 tracking-tight">
                         {data.tagline}
                     </h1>
                     <div className="text-lg italic text-[#555] mb-8 font-serif">
@@ -433,7 +433,7 @@ function HeroAcoustic({ data }: HeroInnerProps) {
             </div>
 
             {/* Bottom Controls */}
-            <div className="absolute bottom-12 w-full max-w-2xl px-8 flex flex-col gap-4">
+            <div className="absolute bottom-8 md:bottom-12 w-full max-w-2xl px-8 flex flex-col gap-4">
                 <div className="flex justify-between text-xs text-[#666] uppercase tracking-widest">
                     <span>L channel</span>
                     <span>02:43 / 04:00</span>
@@ -442,7 +442,7 @@ function HeroAcoustic({ data }: HeroInnerProps) {
                 <div className="h-1 bg-[#333] rounded-full overflow-hidden w-full">
                     <div className="h-full bg-[#1db954] w-[65%]" />
                 </div>
-                <p className="text-center text-[#999] text-sm mt-4">{data.tagline}</p>
+                <p className="text-center text-[#999] text-xs md:text-sm mt-4 line-clamp-2 md:line-clamp-none">{data.tagline}</p>
             </div>
         </section>
     );
@@ -470,9 +470,9 @@ function HeroDarkroom({ data }: HeroInnerProps) {
                 ))}
             </div>
 
-            <div className="relative z-30 mt-[-50px] ml-[10vw] mix-blend-difference">
-                <h1 className="text-9xl font-black tracking-tighter text-white uppercase">{data.name.split(" ")[0]}</h1>
-                <h1 className="text-9xl font-black tracking-tighter text-transparent stroke-white border-white bg-clip-text" style={{ WebkitTextStroke: "2px white" }}>
+            <div className="relative z-30 mt-[-20px] md:mt-[-50px] ml-[5vw] md:ml-[10vw] mix-blend-difference">
+                <h1 className="text-5xl md:text-9xl font-black tracking-tighter text-white uppercase">{data.name.split(" ")[0]}</h1>
+                <h1 className="text-5xl md:text-9xl font-black tracking-tighter text-transparent stroke-white border-white bg-clip-text" style={{ WebkitTextStroke: "2px white" }}>
                     {data.name.split(" ")[1]}
                 </h1>
                 <div className="mt-8 flex items-center gap-4">
@@ -507,10 +507,9 @@ function HeroViewport({ data }: HeroInnerProps) {
                 <div className="relative group cursor-move">
                     {/* Z-Axis */}
                     <div className="absolute bottom-1/2 left-1/2 w-1 h-32 bg-blue-500 -translate-x-1/2 origin-bottom" />
-                    {/* Y-Axis */}
                     <div className="absolute bottom-1/2 left-1/2 w-32 h-1 bg-green-500 -translate-y-1/2 origin-left rotate-[-45deg]" />
 
-                    <h1 className="text-6xl md:text-8xl font-bold relative z-10 text-[#ff8c00] drop-shadow-xl border-2 border-[#ff8c00] p-8 rounded-lg bg-[#2b2b2b]/50 backdrop-blur-sm">
+                    <h1 className="text-4xl md:text-8xl font-bold relative z-10 text-[#ff8c00] drop-shadow-xl border-2 border-[#ff8c00] p-4 md:p-8 rounded-lg bg-[#2b2b2b]/50 backdrop-blur-sm">
                         {data.name}
                     </h1>
                     <div className="absolute -top-4 -left-4 text-[#ff8c00] text-xs">Selected (1)</div>
@@ -553,10 +552,10 @@ function HeroTimeline({ data }: HeroInnerProps) {
                 <div className="aspect-video w-full max-w-4xl bg-[#111] flex flex-col items-center justify-center border border-[#333] relative overflow-hidden group">
                     <span className="absolute top-4 right-4 text-green-500 text-xs font-mono">REC [ ● ]</span>
 
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-2 group-hover:scale-105 transition-transform duration-300">
+                    <h1 className="text-4xl md:text-7xl font-bold tracking-tighter text-white mb-2 group-hover:scale-105 transition-transform duration-300">
                         {data.name}
                     </h1>
-                    <p className="text-[#aaa] text-xl font-light tracking-wide">{data.tagline}</p>
+                    <p className="text-[#aaa] text-lg md:text-xl font-light tracking-wide">{data.tagline}</p>
 
                     {/* Safe Margins Overlay */}
                     <div className="absolute inset-8 border border-[#333] opacity-50 pointer-events-none" />
@@ -613,13 +612,13 @@ function HeroGrid({ data }: HeroInnerProps) {
                     SYSTEM_OVERRIDE // AUTHORIZED
                 </div>
 
-                <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-foreground via-muted to-primary drop-shadow-[0_0_10px_var(--primary)]">
+                <h1 className="text-5xl md:text-8xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-foreground via-muted to-primary drop-shadow-[0_0_10px_var(--primary)]">
                     {data.name.toUpperCase()}
                 </h1>
 
                 <div className="mt-8 flex items-center gap-6">
-                    <div className="w-32 h-1 bg-muted shadow-[0_0_15px_var(--muted)]" />
-                    <p className="text-2xl md:text-3xl font-bold text-foreground max-w-xl shadow-black drop-shadow-md">
+                    <div className="w-16 md:w-32 h-1 bg-muted shadow-[0_0_15px_var(--muted)]" />
+                    <p className="text-xl md:text-3xl font-bold text-foreground max-w-xl shadow-black drop-shadow-md">
                         {data.tagline}
                     </p>
                 </div>

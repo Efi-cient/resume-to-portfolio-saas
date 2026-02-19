@@ -101,7 +101,7 @@ function Card({ project, progress, range, targetScale, i, total }: CardProps) {
             }}
             className="absolute top-0 w-full md:w-[800px] h-[500px] origin-top"
         >
-            <GlassCard className="h-full w-full bg-background p-12 flex flex-col justify-between border-border shadow-2xl shadow-primary/5">
+            <GlassCard className="h-full w-full bg-background p-6 md:p-12 flex flex-col justify-between border-border shadow-2xl shadow-primary/5">
                 <div className="flex justify-between items-start">
                     <div>
                         <span className="text-xs font-mono text-muted mb-2 block">{project.role}</span>
@@ -264,7 +264,7 @@ function ProjectAsymmetric({ data }: ProjectDeckProps) {
                             "absolute inset-0 bg-primary/20",
                             i % 2 === 0 ? "-left-4 -top-4 rounded-tl-[3rem]" : "-right-4 -bottom-4 rounded-br-[3rem]"
                         )} />
-                        <div className="relative bg-muted/10 p-12 backdrop-blur-sm border border-muted/20">
+                        <div className="relative bg-muted/10 p-6 md:p-12 backdrop-blur-sm border border-muted/20">
                             <div className="text-6xl font-black text-muted/20 absolute -top-8 -left-8 select-none">
                                 0{i + 1}
                             </div>

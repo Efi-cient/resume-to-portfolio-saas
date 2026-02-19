@@ -173,7 +173,7 @@ function SkillsMasonry({ data }: SkillsInnerProps) {
                         key={cat}
                         whileHover={{ scale: 1.05, rotate: 0 }}
                         className={cn(
-                            "w-[300px] aspect-square p-8 shadow-[10px_10px_0px_0px_var(--muted)] border-2 border-muted flex flex-col bg-background",
+                            "w-full max-w-[300px] aspect-square p-8 shadow-[10px_10px_0px_0px_var(--muted)] border-2 border-muted flex flex-col bg-background",
                             rotations[i % rotations.length]
                         )}
                     >
@@ -204,7 +204,7 @@ function SkillsMinimal({ data }: SkillsInnerProps) {
         <section className="min-h-screen py-24 px-8 md:px-24 bg-background text-foreground">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-foreground border-2 border-foreground">
                 {categories.map((cat, i) => (
-                    <div key={cat} className="bg-background p-12 min-h-[400px] flex flex-col justify-between hover:bg-muted/10 transition-colors">
+                    <div key={cat} className="bg-background p-6 md:p-12 min-h-[400px] flex flex-col justify-between hover:bg-muted/10 transition-colors">
                         <div>
                             <span className="text-xs font-bold uppercase tracking-widest bg-foreground text-background px-2 py-1">Section 0{i + 1}</span>
                             <h3 className="text-4xl font-bold mt-8 mb-8 tracking-tight">{cat}</h3>
