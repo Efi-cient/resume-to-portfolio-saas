@@ -255,7 +255,7 @@ export default function BuilderPage() {
                     <div ref={scrollContainerRef} className="h-full overflow-y-auto scrollbar-hide">
                         <Hero data={resumeData} />
                         <SkillsBento data={resumeData} />
-                        <ProjectDeck data={resumeData} scrollContainerRef={scrollContainerRef} />
+                        <ProjectDeck data={resumeData} scrollContainerRef={scrollContainerRef as any} />
                         <Footer data={resumeData} />
                     </div>
                 </div>

@@ -23,6 +23,14 @@ export function SkillsBento({ data = defaultResumeData }: SkillsBentoProps) {
         case "minimal": return <SkillsMinimal data={data} />;
         case "grid": return <SkillsGrid data={data} />;
         case "centered": return <SkillsBentoGrid data={data} />;
+        // New mappings
+        case "blueprint": return <SkillsGrid data={data} />;
+        case "print": return <SkillsMinimal data={data} />;
+        case "journal": return <SkillsList data={data} />;
+        case "acoustic": return <SkillsList data={data} />;
+        case "darkroom": return <SkillsBentoGrid data={data} />;
+        case "viewport": return <SkillsGrid data={data} />;
+        case "timeline": return <SkillsList data={data} />;
         default: return <SkillsBentoGrid data={data} />;
     }
 }
@@ -30,7 +38,11 @@ export function SkillsBento({ data = defaultResumeData }: SkillsBentoProps) {
 // ----------------------------------------------------------------------
 // 1. CENTERED / BENTO LAYOUT (Original)
 // ----------------------------------------------------------------------
-function SkillsBentoGrid({ data }: SkillsBentoProps) {
+interface SkillsInnerProps {
+    data: typeof defaultResumeData;
+}
+
+function SkillsBentoGrid({ data }: SkillsInnerProps) {
     const [selected, setSelected] = useState<string | null>(null);
     const categories = Object.keys(data.skills) as Array<keyof typeof data.skills>;
     const icons: any = { strategic: BarChart, technical: Cpu, leadership: Users };
@@ -96,7 +108,7 @@ function SkillsBentoGrid({ data }: SkillsBentoProps) {
 // ----------------------------------------------------------------------
 // 2. SPLIT / LIST LAYOUT
 // ----------------------------------------------------------------------
-function SkillsList({ data }: SkillsBentoProps) {
+function SkillsList({ data }: SkillsInnerProps) {
     const categories = Object.keys(data.skills) as Array<keyof typeof data.skills>;
 
     return (
@@ -142,7 +154,7 @@ function SkillsList({ data }: SkillsBentoProps) {
 // ----------------------------------------------------------------------
 // 3. ASYMMETRIC / MASONRY LAYOUT
 // ----------------------------------------------------------------------
-function SkillsMasonry({ data }: SkillsBentoProps) {
+function SkillsMasonry({ data }: SkillsInnerProps) {
     const categories = Object.keys(data.skills) as Array<keyof typeof data.skills>;
     const rotations = ["rotate-[-2deg]", "rotate-[3deg]", "rotate-[-1deg]"];
     // Using theme colors for variation would be ideal, but we can stick to simple structure for now 
@@ -186,7 +198,7 @@ function SkillsMasonry({ data }: SkillsBentoProps) {
 // ----------------------------------------------------------------------
 // 4. MINIMAL LAYOUT
 // ----------------------------------------------------------------------
-function SkillsMinimal({ data }: SkillsBentoProps) {
+function SkillsMinimal({ data }: SkillsInnerProps) {
     const categories = Object.keys(data.skills) as Array<keyof typeof data.skills>;
     return (
         <section className="min-h-screen py-24 px-8 md:px-24 bg-background text-foreground">
@@ -214,7 +226,7 @@ function SkillsMinimal({ data }: SkillsBentoProps) {
 // ----------------------------------------------------------------------
 // 5. GRID LAYOUT
 // ----------------------------------------------------------------------
-function SkillsGrid({ data }: SkillsBentoProps) {
+function SkillsGrid({ data }: SkillsInnerProps) {
     const categories = Object.keys(data.skills) as Array<keyof typeof data.skills>;
     return (
         <section className="min-h-screen py-24 px-8 md:px-16 bg-background text-foreground">

@@ -24,6 +24,14 @@ export function ProjectDeck({ data = defaultResumeData, scrollContainerRef }: Pr
         case "grid": return <ProjectGrid data={data} />;
         case "asymmetric": return <ProjectAsymmetric data={data} />;
         case "centered": return <ProjectDeckCentered data={data} scrollContainerRef={scrollContainerRef} />;
+        // New mappings
+        case "blueprint": return <ProjectGrid data={data} />;
+        case "print": return <ProjectMinimal data={data} />;
+        case "journal": return <ProjectList data={data} />;
+        case "acoustic": return <ProjectList data={data} />;
+        case "darkroom": return <ProjectGrid data={data} />;
+        case "viewport": return <ProjectAsymmetric data={data} />;
+        case "timeline": return <ProjectList data={data} />;
         default: return <ProjectDeckCentered data={data} scrollContainerRef={scrollContainerRef} />;
     }
 }

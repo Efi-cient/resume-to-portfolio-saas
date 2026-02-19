@@ -15,7 +15,7 @@ export type Theme =
     | "game_dev"
     | "academic";
 
-export type LayoutType = "centered" | "split" | "asymmetric" | "grid" | "minimal";
+export type LayoutType = "centered" | "split" | "asymmetric" | "grid" | "minimal" | "blueprint" | "print" | "journal" | "acoustic" | "darkroom" | "viewport" | "timeline";
 
 export interface ThemeConfig {
     name: Theme;
@@ -106,7 +106,7 @@ export const themes: Record<Theme, ThemeConfig> = {
             background: "#ffffff",
             foreground: "#000000",
             muted: "#52525b",
-            primary: "#000000",
+            primary: "#ff0000", /* Red accent for Swiss Style */
             border: "#e4e4e7",
         },
         fonts: {
@@ -139,12 +139,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     video_editor: {
         name: "video_editor",
         label: "Timeline Pro",
-        layout: "split",
+        layout: "timeline",
         colors: {
             background: "#1e1e1e",
             foreground: "#d4d4d4",
             muted: "#858585",
-            primary: "#a855f7",
+            primary: "#3b82f6", /* Blue for timeline selection */
             border: "#3f3f46",
         },
         fonts: {
@@ -158,13 +158,13 @@ export const themes: Record<Theme, ThemeConfig> = {
     "3d_artist": {
         name: "3d_artist",
         label: "Viewport Shading",
-        layout: "grid",
+        layout: "viewport",
         colors: {
-            background: "#2d2d2d",
-            foreground: "#e0e0e0",
-            muted: "#a3a3a3",
-            primary: "#f97316",
-            border: "#404040",
+            background: "#2b2b2b", /* Blender dark gray */
+            foreground: "#efefef",
+            muted: "#9e9e9e",
+            primary: "#ff8c00", /* Orange selection */
+            border: "#444444",
         },
         fonts: {
             sans: "var(--font-inter)",
@@ -177,12 +177,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     graphic_designer: {
         name: "graphic_designer",
         label: "Print Ready",
-        layout: "minimal",
+        layout: "print",
         colors: {
             background: "#ffffff",
             foreground: "#000000",
             muted: "#9ca3af",
-            primary: "#06b6d4",
+            primary: "#00ffff", /* Cyan */
             border: "#e5e7eb",
         },
         fonts: {
@@ -215,12 +215,12 @@ export const themes: Record<Theme, ThemeConfig> = {
     photographer: {
         name: "photographer",
         label: "Darkroom",
-        layout: "centered",
+        layout: "darkroom",
         colors: {
             background: "#000000",
             foreground: "#e5e5e5",
             muted: "#525252",
-            primary: "#ef4444",
+            primary: "#ef4444", /* Red light */
             border: "#262626",
         },
         fonts: {
@@ -234,13 +234,13 @@ export const themes: Record<Theme, ThemeConfig> = {
     architect: {
         name: "architect",
         label: "Blueprint",
-        layout: "minimal",
+        layout: "blueprint",
         colors: {
-            background: "#f0f4f8",
-            foreground: "#1e293b",
-            muted: "#64748b",
-            primary: "#3b82f6",
-            border: "#cbd5e1",
+            background: "#0f3460", /* Blueprint blue */
+            foreground: "#e2e2e2",
+            muted: "#537895",
+            primary: "#ffffff",
+            border: "rgba(255,255,255,0.3)",
         },
         fonts: {
             sans: "sans-serif",
@@ -272,13 +272,13 @@ export const themes: Record<Theme, ThemeConfig> = {
     musician: {
         name: "musician",
         label: "Acoustic",
-        layout: "centered",
+        layout: "acoustic",
         colors: {
-            background: "#2a2422",
-            foreground: "#efeae5",
-            muted: "#a8a29e",
-            primary: "#d97706",
-            border: "#57534e",
+            background: "#1a1a1a",
+            foreground: "#e0e0e0",
+            muted: "#666666",
+            primary: "#1db954", /* Spotify-ish green or waveform color */
+            border: "#333333",
         },
         fonts: {
             sans: "serif",
@@ -310,13 +310,13 @@ export const themes: Record<Theme, ThemeConfig> = {
     academic: {
         name: "academic",
         label: "Journal",
-        layout: "minimal",
+        layout: "journal",
         colors: {
-            background: "#fcfbf7",
-            foreground: "#292524",
-            muted: "#78716c",
-            primary: "#78350f",
-            border: "#e7e5e4",
+            background: "#fdfbf7", /* Paper-like off-white */
+            foreground: "#222222",
+            muted: "#666666",
+            primary: "#8b0000", /* Academic maroon */
+            border: "#e0e0e0",
         },
         fonts: {
             sans: "serif",
